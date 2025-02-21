@@ -5,6 +5,7 @@ export default function NewsDetailsPage({ params }) {
   const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.slug === newsSlug);
   return (
     <article className="news-article">
+      <h1>Details Page</h1>
       <header>
         <img src={`/images/news/${newsItem.image}`} alt={newsItem.title} />
         <h1>{newsItem.title}</h1>
