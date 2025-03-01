@@ -9,7 +9,6 @@ import Link from "next/link";
 
 export default function FilteredNewsPage({ params }) {
   const filter = params.filter;
-  // const news = getNewsForYear(newsYear);
   const selectedYear = filter?.[0];
   const selectedMonth = filter?.[1];
 
@@ -32,6 +31,14 @@ export default function FilteredNewsPage({ params }) {
     newsContent = <NewsList news={news} />;
   }
 
+  if (
+    (selectedYear && !getAvailableNewsYears().includes(+selectedYear)) ||
+    (!selectedMonth &&
+      getAvailableNewsMonths(selectedYear).includes(+selectedMonth))
+  ) {
+    throw new Error("Invalid filter.");
+  }
+
   return (
     <>
       <header id="archive-header">
@@ -52,7 +59,6 @@ export default function FilteredNewsPage({ params }) {
         </nav>
       </header>
       {newsContent}
-      {/* <NewsList news={news} /> */}
     </>
   );
 }
